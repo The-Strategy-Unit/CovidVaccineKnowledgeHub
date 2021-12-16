@@ -5,9 +5,20 @@ Authors@R: person('The Strategy Unit', '', email = 'strategy.unit@nhs.net', role
 Description: A dashboard allowing users to search for Covid Vaccine evidence stored on NHS Futures.
 License: MIT + file LICENSE
 Imports: 
+    attempt,
     config (>= 0.3.1),
+    DT,
+    glue,
     golem (>= 0.3.1),
-    shiny (>= 1.7.1)
+    htmltools,
+    processx,
+    shiny (>= 1.7.1),
+    shinydashboard
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
+Suggests: 
+    spelling,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Language: en-US
