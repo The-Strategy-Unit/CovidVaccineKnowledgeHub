@@ -7,13 +7,19 @@ License: MIT + file LICENSE
 Imports: 
     attempt,
     config (>= 0.3.1),
+    dplyr,
     DT,
     glue,
     golem (>= 0.3.1),
     htmltools,
+    pkgload,
     processx,
+    purrr,
+    readxl,
+    rlang,
     shiny (>= 1.7.1),
-    shinydashboard
+    shinydashboard,
+    tidyr
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.2

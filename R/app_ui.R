@@ -18,12 +18,11 @@ app_ui <- function(request) {
           multiple = TRUE
         ),
         textInput("search", "Search"),
-        sliderInput(
+        selectizeInput(
           "dates",
           "Dates",
-          as.Date("2020-01-01"),
-          as.Date("2021-12-01"),
-          c(as.Date("2020-01-01"), as.Date("2021-12-01"))
+          choices = NULL,
+          multiple = TRUE
         ),
         checkboxGroupInput(
           "level_evidence",
@@ -51,13 +50,24 @@ app_ui <- function(request) {
         selectizeInput(
           "progress_plus",
           "PROGRESS-Plus",
-          choices = NULL,
+          choices = c(
+            "1. Place of residence",
+            "2. Race, ethnicity, culture, language",
+            "3. Occupation",
+            "4. Gender/Sex",
+            "5. Religion",
+            "6. Education",
+            "7. Socioeconomic status (SES)",
+            "8. Social Capital",
+            "9. Age",
+            "10. Disability"
+          ),
           multiple = TRUE
         ),
         selectizeInput(
           "jcvi_report",
           "JCVI Report",
-          choices = NULL,
+          choices = as.character(1:12),
           multiple = TRUE
         )
       ),
