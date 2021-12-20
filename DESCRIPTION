@@ -28,3 +28,5 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Language: en-US
+URL: https://github.com/The-Strategy-Unit/CovidVaccineKnowledgeHub
+BugReports: https://github.com/The-Strategy-Unit/CovidVaccineKnowledgeHub/issues
