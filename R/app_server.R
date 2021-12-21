@@ -32,7 +32,7 @@ app_server <- function( input, output, session ) {
   })
 
   # outputs
-  output$evidence <- renderTable({
+  filtered_data <- reactive({
     data <- d
 
     if (isTruthy(input$tags)) {
@@ -48,7 +48,7 @@ app_server <- function( input, output, session ) {
 
     if (isTruthy(input$dates)) {
       data <- data |>
-        dplyr::filter(.data[["date"]] %in% input$dates)
+        dplyr::filter(.data[["date"]] %in% as.POSIXct(input$dates, tz = "UTC"))
     }
 
     if (isTruthy(input$level_evidence)) {
@@ -85,4 +85,6 @@ app_server <- function( input, output, session ) {
 
     dplyr::select(data, .data[["title"]])
   })
+
+  output$evidence <- renderTable(filtered_data())
 }
