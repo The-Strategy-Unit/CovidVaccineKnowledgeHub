@@ -1,5 +1,5 @@
 options(golem.app.prod = FALSE)
 golem::detach_all_attached()
 golem::document_and_reload()
-options(shiny.autoreload = TRUE)
+options(shiny.autoreload = FALSE)
 shiny::runApp(appDir = here::here())
