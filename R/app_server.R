@@ -22,7 +22,7 @@ app_server <- function( input, output, session ) {
     f("main_theme")
     f("clinic_model")
     f("methods_used")
-    
+
     date <- sort(unique(d$date))
     date <- purrr::set_names(date, format(date, "%b-%y"))
     updateSelectizeInput(session, "dates", choices = date)
@@ -43,10 +43,7 @@ app_server <- function( input, output, session ) {
     if (isTruthy(input$search)) {
       # TODO: replace regex with levenshtein?
       data <- data |>
-        dplyr::rowwise() |>
-        dplyr::filter(purrr::some(dplyr::c_across(where(is.character)), stringr::str_detect, input$search)) |>
-        dplyr::ungroup()
-      golem::cat_dev("ran search\n")
+        dplyr::filter(dplyr::if_any(where(is.character), stringr::str_detect, stringr::fixed(input$search)))
     }
 
     if (isTruthy(input$dates)) {
