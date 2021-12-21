@@ -6,74 +6,91 @@
 #' @import shinydashboard
 #' @noRd
 app_ui <- function(request) {
+  header <- dashboardHeader(
+    title = "Covid Evidence Knowledge Hub"
+  )
+
+  header$children[[3]]$children[[3]]$children[[1]] <- tags$img(
+    src = "https://www.strategyunitwm.nhs.uk/themes/custom/ie_bootstrap/logo.svg",
+    title = "The Strategy Unit",
+    alt = "The Strategy Unit Logo",
+    align = "right",
+    height = "40"
+  )
+
+  sidebar <- dashboardSidebar(
+    selectizeInput(
+      "tags",
+      "Tags",
+      choices = c("Capability", "Opportunity", "Motivation"),
+      multiple = TRUE
+    ),
+    textInput("search", "Search"),
+    selectizeInput(
+      "dates",
+      "Dates",
+      choices = NULL,
+      multiple = TRUE
+    ),
+    checkboxGroupInput(
+      "level_evidence",
+      "Level of Evidence",
+      1:3
+    ),
+    selectizeInput(
+      "main_theme",
+      "Main Theme",
+      choices = NULL,
+      multiple = TRUE
+    ),
+    selectizeInput(
+      "clinic_model",
+      "Clinic Model",
+      choices = NULL,
+      multiple = TRUE
+    ),
+    selectizeInput(
+      "methods_used",
+      "Methods Used",
+      choices = NULL,
+      multiple = TRUE
+    ),
+    selectizeInput(
+      "progress_plus",
+      "PROGRESS-Plus",
+      choices = c(
+        "1. Place of residence",
+        "2. Race, ethnicity, culture, language",
+        "3. Occupation",
+        "4. Gender/Sex",
+        "5. Religion",
+        "6. Education",
+        "7. Socioeconomic status (SES)",
+        "8. Social Capital",
+        "9. Age",
+        "10. Disability"
+      ),
+      multiple = TRUE
+    ),
+    selectizeInput(
+      "jcvi_report",
+      "JCVI Report",
+      choices = as.character(1:12),
+      multiple = TRUE
+    )
+  )
+
+  body <- dashboardBody(
+    tableOutput("evidence")
+  )
+
   tagList(
     golem_add_external_resources(),
+    tags$link(rel = "stylesheet", type = "text/css", href = "www/skin-su.css"),
     dashboardPage(
-      dashboardHeader(title = "Covid Evidence Knowledge Hub"),
-      dashboardSidebar(
-        selectizeInput(
-          "tags",
-          "Tags",
-          choices = c("Capability", "Opportunity", "Motivation"),
-          multiple = TRUE
-        ),
-        textInput("search", "Search"),
-        selectizeInput(
-          "dates",
-          "Dates",
-          choices = NULL,
-          multiple = TRUE
-        ),
-        checkboxGroupInput(
-          "level_evidence",
-          "Level of Evidence",
-          1:3
-        ),
-        selectizeInput(
-          "main_theme",
-          "Main Theme",
-          choices = NULL,
-          multiple = TRUE
-        ),
-        selectizeInput(
-          "clinic_model",
-          "Clinic Model",
-          choices = NULL,
-          multiple = TRUE
-        ),
-        selectizeInput(
-          "methods_used",
-          "Methods Used",
-          choices = NULL,
-          multiple = TRUE
-        ),
-        selectizeInput(
-          "progress_plus",
-          "PROGRESS-Plus",
-          choices = c(
-            "1. Place of residence",
-            "2. Race, ethnicity, culture, language",
-            "3. Occupation",
-            "4. Gender/Sex",
-            "5. Religion",
-            "6. Education",
-            "7. Socioeconomic status (SES)",
-            "8. Social Capital",
-            "9. Age",
-            "10. Disability"
-          ),
-          multiple = TRUE
-        ),
-        selectizeInput(
-          "jcvi_report",
-          "JCVI Report",
-          choices = as.character(1:12),
-          multiple = TRUE
-        )
-      ),
-      dashboardBody(
-        tableOutput("evidence")
-      )
+      header,
+      sidebar,
+      body
     )
   )
 }
