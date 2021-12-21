@@ -1,0 +1,12 @@
+.git/
+.gitignore
+.lintr
+.Rhistory
+.Rproj.user
+.vscode/launch.json
+.vscode/tasks.json
+dev/run_dev.R
+Readme.md
+Readme.Rmd
+rsconnect/
+tests/
