@@ -20,7 +20,7 @@ Imports:
     readxl,
     rlang,
     shiny (>= 1.7.1),
-    shinydashboard,
+    bs4Dash,
     tidyr
 Encoding: UTF-8
 LazyData: true

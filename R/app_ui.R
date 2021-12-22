@@ -6,7 +6,7 @@
 #' @import shinydashboard
 #' @noRd
 app_ui <- function(request) {
-  header <- dashboardHeader(
+  header <- bs4Dash::dashboardHeader(
     title = "Covid Evidence Knowledge Hub"
   )
 
@@ -18,7 +18,7 @@ app_ui <- function(request) {
     height = "40"
   )
 
-  sidebar <- dashboardSidebar(
+  sidebar <- bs4Dash::dashboardSidebar(
     selectizeInput(
       "tags",
       "Tags",
@@ -80,14 +80,14 @@ app_ui <- function(request) {
     )
   )
 
-  body <- dashboardBody(
-    tableOutput("evidence")
+  body <- bs4Dash::dashboardBody(
+    mod_knowledge_items_ui("evidence")
   )
 
   tagList(
     golem_add_external_resources(),
-    tags$link(rel = "stylesheet", type = "text/css", href = "www/skin-su.css"),
-    dashboardPage(
+    #tags$link(rel = "stylesheet", type = "text/css", href = "www/skin-su.css"),
+    bs4Dash::dashboardPage(
       header,
       sidebar,
       body

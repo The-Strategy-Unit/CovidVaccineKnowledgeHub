@@ -83,8 +83,9 @@ app_server <- function( input, output, session ) {
 
     }
 
-    dplyr::select(data, .data[["title"]])
+    #dplyr::select(data, .data[["title"]])
+    data
   })
 
-  output$evidence <- renderTable(filtered_data())
+  mod_knowledge_items_server("evidence", filtered_data)
 }
