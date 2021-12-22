@@ -77,13 +77,12 @@ app_server <- function( input, output, session ) {
         dplyr::filter(purrr::map_lgl(.data[["progress_plus"]], ~any(.x %in% input$progress_plus)))
     }
 
-    if (isTruthy(input$jcvi_report)) {
+    if (isTruthy(input$jcvi_cohort)) {
       data <- data |>
-        dplyr::filter(purrr::map_lgl(.data[["jcvi_report"]], ~any(.x %in% input$jcvi_report)))
+        dplyr::filter(purrr::map_lgl(.data[["jcvi_cohort"]], ~any(.x %in% input$jcvi_cohort)))
 
     }
 
-    #dplyr::select(data, .data[["title"]])
     data
   })
 

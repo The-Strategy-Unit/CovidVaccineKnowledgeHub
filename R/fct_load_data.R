@@ -28,7 +28,7 @@ load_data <- function() {
     dplyr::group_by(.data[["id"]]) |>
     dplyr::summarise(progress_plus = list(.data[["name"]]))
 
-  jcvi_report <- d |>
+  jcvi_cohort <- d |>
     dplyr::select(
       .data[["id"]],
       .data[["1"]],
@@ -47,7 +47,7 @@ load_data <- function() {
     tidyr::pivot_longer(-.data[["id"]]) |>
     tidyr::drop_na(.data[["value"]]) |>
     dplyr::group_by(.data[["id"]]) |>
-    dplyr::summarise(jcvi_report = list(.data[["name"]]))
+    dplyr::summarise(jcvi_cohort = list(.data[["name"]]))
 
   tags <- d |>
     dplyr::select(
@@ -78,6 +78,6 @@ load_data <- function() {
       source = .data[["Link to original source"]]
     ) |>
     dplyr::left_join(progress_plus, by = "id") |>
-    dplyr::left_join(jcvi_report, by = "id") |>
+    dplyr::left_join(jcvi_cohort, by = "id") |>
     dplyr::left_join(tags, by = "id")
 }

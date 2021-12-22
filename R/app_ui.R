@@ -72,8 +72,8 @@ app_ui <- function(request) {
       multiple = TRUE
     ),
     selectizeInput(
-      "jcvi_report",
-      "JCVI Report",
+      "jcvi_cohort",
+      "JCVI Cohort",
       choices = as.character(1:12),
       multiple = TRUE
     )
