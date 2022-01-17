@@ -5,19 +5,15 @@
 #' @import shiny
 #' @noRd
 app_ui <- function(request) {
-  header <- bs4Dash::dashboardHeader(
-    title = "Covid Evidence Knowledge Hub"
+  header <- bs4Dash::bs4DashNavbar(
+    title = bs4Dash::dashboardBrand(
+      "Vaccine Knowledge",
+      image = "https://www.strategyunitwm.nhs.uk/themes/custom/ie_bootstrap/logo.svg"
+    )
   )
 
-  header$children[[3]]$children[[3]]$children[[1]] <- tags$img(
-    src = "https://www.strategyunitwm.nhs.uk/themes/custom/ie_bootstrap/logo.svg",
-    title = "The Strategy Unit",
-    alt = "The Strategy Unit Logo",
-    align = "right",
-    height = "40"
-  )
-
-  sidebar <- bs4Dash::dashboardSidebar(
+  sidebar <- bs4Dash::bs4DashSidebar(
+    skin = "light",
     selectizeInput(
       "tags",
       "Tags",
@@ -79,17 +75,18 @@ app_ui <- function(request) {
     )
   )
 
-  body <- bs4Dash::dashboardBody(
+  body <- bs4Dash::bs4DashBody(
     mod_knowledge_items_ui("evidence")
   )
 
   tagList(
     golem_add_external_resources(),
     #tags$link(rel = "stylesheet", type = "text/css", href = "www/skin-su.css"),
-    bs4Dash::dashboardPage(
+    bs4Dash::bs4DashPage(
       header,
       sidebar,
-      body
+      body,
+      freshTheme = su_fresh_theme
     )
   )
 }
