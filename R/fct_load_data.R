@@ -67,11 +67,11 @@ load_data <- function() {
       location = .data[["Location"]],
       title = .data[["Resource title"]],
       publisher = .data[["Publisher"]],
-      date = .data[["Date"]],
-      evidence_type = .data[["Evidence type (e.g. qualitative analysis, quantitative analysis, mixed methods, lessons learned, desk research)"]], # Exclude Linting
-      level_evidence = .data[["Level of evidence"]],
+      date = .data[["Date of publication: organised into four month periods, beginning January 2020."]], # Exclude Linting
+      evidence_type = .data[["Evidence type: the format of the resource."]], # Exclude Linting
+      level_evidence = .data[["Level of evidence: organised according to Nesta's Standards of Evidence. Level 1 is the weakest evidence type, usually consisting of an account of the impact. The strongest evidence is level 5, with the resource showing that the intervention could be scal"]],
       main_theme = .data[["Main Theme"]],
-      methods_used = .data[["Methods used"]],
+      methods_used = .data[["Methods used: the process used which lead to the outcome described."]],
       brief_description = .data[["Brief description of the intervention/model"]],
       rationale = .data[["Rationale for the intervention/ model"]],
       clinic_model = .data[["Clinic model"]],
