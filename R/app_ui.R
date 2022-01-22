@@ -14,13 +14,13 @@ app_ui <- function(request) {
 
   sidebar <- bs4Dash::bs4DashSidebar(
     skin = "light",
+    textInput("search", "Search"),
     selectizeInput(
       "tags",
       "Tags",
       choices = c("Capability", "Opportunity", "Motivation"),
       multiple = TRUE
     ),
-    textInput("search", "Search"),
     selectizeInput(
       "dates",
       "Dates",
