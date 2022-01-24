@@ -16,14 +16,20 @@ app_ui <- function(request) {
     skin = "light",
     textInput("search", "Search"),
     selectizeInput(
-      "tags",
-      "Tags",
-      choices = c("Capability", "Opportunity", "Motivation"),
+      "dates",
+      "Dates",
+      choices = NULL,
       multiple = TRUE
     ),
     selectizeInput(
-      "dates",
-      "Dates",
+      "jcvi_cohort",
+      "JCVI Cohort",
+      choices = as.character(1:12),
+      multiple = TRUE
+    ),
+    selectizeInput(
+      "methods_used",
+      "Evidence Type",
       choices = NULL,
       multiple = TRUE
     ),
@@ -31,6 +37,12 @@ app_ui <- function(request) {
       "level_evidence",
       "Level of Evidence",
       1:3
+    ),
+    selectizeInput(
+      "tags",
+      "Tags",
+      choices = c("Capability", "Opportunity", "Motivation"),
+      multiple = TRUE
     ),
     selectizeInput(
       "main_theme",
@@ -41,12 +53,6 @@ app_ui <- function(request) {
     selectizeInput(
       "clinic_model",
       "Clinic Model",
-      choices = NULL,
-      multiple = TRUE
-    ),
-    selectizeInput(
-      "methods_used",
-      "Methods Used",
       choices = NULL,
       multiple = TRUE
     ),
@@ -65,12 +71,6 @@ app_ui <- function(request) {
         "9. Age",
         "10. Disability"
       ),
-      multiple = TRUE
-    ),
-    selectizeInput(
-      "jcvi_cohort",
-      "JCVI Cohort",
-      choices = as.character(1:12),
       multiple = TRUE
     )
   )
