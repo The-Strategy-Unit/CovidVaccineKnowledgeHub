@@ -6,7 +6,12 @@
 #'
 #' @noRd
 load_data <- function() {
-  d <- readxl::read_excel(app_sys("data.xlsx"), sheet = "Datasheet", skip = 1) |>
+  filename <- withr::local_file("data.xlsx")
+  url <- "https://strategyunit.blob.core.windows.net/927covidvaccineknowledge/data.xlsx"
+
+  download.file(url, filename, mode = "wb")
+
+  d <- readxl::read_excel(filename, sheet = "Datasheet", skip = 1) |>
     dplyr::mutate(id = dplyr::row_number(), .before = dplyr::everything())
 
   progress_plus <- d |>
