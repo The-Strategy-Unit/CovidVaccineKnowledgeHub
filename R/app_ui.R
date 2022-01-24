@@ -37,41 +37,6 @@ app_ui <- function(request) {
       "level_evidence",
       "Level of Evidence",
       1:3
-    ),
-    selectizeInput(
-      "tags",
-      "Tags",
-      choices = c("Capability", "Opportunity", "Motivation"),
-      multiple = TRUE
-    ),
-    selectizeInput(
-      "main_theme",
-      "Main Theme",
-      choices = NULL,
-      multiple = TRUE
-    ),
-    selectizeInput(
-      "clinic_model",
-      "Clinic Model",
-      choices = NULL,
-      multiple = TRUE
-    ),
-    selectizeInput(
-      "progress_plus",
-      "PROGRESS-Plus",
-      choices = c(
-        "1. Place of residence",
-        "2. Race, ethnicity, culture, language",
-        "3. Occupation",
-        "4. Gender/Sex",
-        "5. Religion",
-        "6. Education",
-        "7. Socioeconomic status (SES)",
-        "8. Social Capital",
-        "9. Age",
-        "10. Disability"
-      ),
-      multiple = TRUE
     )
   )
 

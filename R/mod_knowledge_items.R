@@ -4,18 +4,18 @@
 #'
 #' @param id,input,output,session Internal parameters for {shiny}.
 #'
-#' @noRd 
+#' @noRd
 #'
-#' @importFrom shiny NS tagList 
+#' @importFrom shiny NS tagList
 mod_knowledge_items_ui <- function(id) {
   ns <- NS(id)
 
   shiny::uiOutput(ns("accordion"))
 }
-    
+
 #' knowledge_items Server Functions
 #'
-#' @noRd 
+#' @noRd
 mod_knowledge_items_server <- function(id, data_reactive) {
 
   knowledge_item_card <- function(x) {
@@ -46,7 +46,22 @@ mod_knowledge_items_server <- function(id, data_reactive) {
         "data-parent" = paste0("#", id, "-accordion"),
         htmltools::div(
           class = "card-body",
-          htmltools::p(x$brief_description),
+          htmltools::p(
+            htmltools::strong("Clinic Model: "),
+            x$clinic_model
+          ),
+          htmltools::p(
+            htmltools::strong("Intervention Type: "),
+            x$main_theme
+          ),
+          htmltools::p(
+            htmltools::strong("Target Group: "),
+            paste(x$progress_plus, collapse = ", ")
+          ),
+          htmltools::p(
+            htmltools::strong("Behavioural Change: "),
+            paste(x$tags, collapse = ", ")
+          ),
           htmltools::p(
             htmltools::a(href = x$source, "source", target="_blank")
           )
@@ -57,7 +72,7 @@ mod_knowledge_items_server <- function(id, data_reactive) {
 
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
- 
+
     output$accordion <- renderUI({
       data_reactive() |>
         purrr::array_tree() |>
