@@ -17,14 +17,28 @@ app_ui <- function(request) {
     textInput("search", "Search"),
     selectizeInput(
       "dates",
-      "Dates",
+      "Date of Publication",
       choices = NULL,
       multiple = TRUE
     ),
     selectizeInput(
       "jcvi_cohort",
       "JCVI Cohort",
-      choices = as.character(1:12),
+      choices = c(
+        "residents in a care home for older adults and their carers" = "1",
+        "all those 80 years of age and over and frontline health and social care workers" = "2",
+        "all those 75 years of age and over" = "3",
+        "all those 70 years of age and over and clinically extremely vulnerable individuals" = "4",
+        "all those 65 years of age and over" = "5",
+        paste("all individuals aged 16 years to 64 years with underlying health conditions which put them at higher",
+              "risk of serious disease and mortality") = "6",
+        "all those 60 years of age and over" = "7",
+        "all those 55 years of age and over" = "8",
+        "all those 50 years of age and over" = "9",
+        "all those aged 40 to 49 years" = "10",
+        "all those aged 30 to 39 years" = "11",
+        "all those aged 18 to 29 years" = "12"
+      ),
       multiple = TRUE
     ),
     selectizeInput(
@@ -33,10 +47,11 @@ app_ui <- function(request) {
       choices = NULL,
       multiple = TRUE
     ),
-    checkboxGroupInput(
+    selectizeInput(
       "level_evidence",
       "Level of Evidence",
-      1:3
+      choices = 1:3,
+      multiple = TRUE
     )
   )
 
