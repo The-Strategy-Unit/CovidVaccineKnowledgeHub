@@ -22,9 +22,8 @@ app_server <- function( input, output, session ) {
     methods_used <- sort(unique(d[["methods_used"]]))
     updateSelectizeInput(session, "methods_used", choices = methods_used)
 
-    date <- sort(unique(d$date))
-    date <- purrr::set_names(date, format(date, "%b-%y"))
-    updateSelectizeInput(session, "dates", choices = date)
+    dates <- levels(d$date)
+    updateSelectizeInput(session, "dates", choices = dates)
 
     tags <- sort(unique(purrr::flatten_chr(d[["tags"]])))
     updateSelectizeInput(session, "tags", choices = tags)
@@ -42,7 +41,7 @@ app_server <- function( input, output, session ) {
 
     if (isTruthy(input$dates)) {
       d <- d |>
-        dplyr::filter(.data[["date"]] %in% as.POSIXct(input$dates, tz = "UTC"))
+        dplyr::filter(.data[["date"]] %in% input$dates)
     }
 
     if (isTruthy(input$level_evidence)) {

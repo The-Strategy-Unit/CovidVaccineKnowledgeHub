@@ -85,5 +85,23 @@ load_data <- function() {
     ) |>
     dplyr::left_join(progress_plus, by = "id") |>
     dplyr::left_join(jcvi_cohort, by = "id") |>
-    dplyr::left_join(tags, by = "id")
+    dplyr::left_join(tags, by = "id") |>
+    dplyr::mutate(
+      dplyr::across(
+        .data[["date"]],
+        ~dplyr::case_when(
+          .x < as.POSIXct("2021-04-01") ~ "Jan to Mar 21",
+          .x < as.POSIXct("2021-07-01") ~ "Apr to Jun 21",
+          .x < as.POSIXct("2021-10-01") ~ "Jul to Sep 21",
+          # .x < as.POSIXct("2022-01-01") ~ "Oct to Dec 21",
+          TRUE ~ as.character(NA)
+        ) |>
+          factor(levels = c(
+            "Jan to Mar 21",
+            "Apr to Jun 21",
+            "Jul to Sep 21"
+            # "Oct to Dec 21"
+          ))
+      )
+    )
 }
