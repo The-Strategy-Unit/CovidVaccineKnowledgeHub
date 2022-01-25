@@ -14,6 +14,19 @@ app_ui <- function(request) {
 
   sidebar <- bs4Dash::bs4DashSidebar(
     skin = "light",
+    bs4Dash::bs4SidebarMenu(
+      bs4Dash::bs4SidebarMenuItem(
+        "Content",
+        startExpanded = TRUE,
+        selected = TRUE,
+        tabName = "content"
+      ),
+      bs4Dash::bs4SidebarMenuItem(
+        "Heading Details",
+        tabName = "heading_details"
+      )
+    ),
+    # content filters
     textInput("search", "Search"),
     selectizeInput(
       "dates",
@@ -54,8 +67,108 @@ app_ui <- function(request) {
     )
   )
 
+  heading_details <- tagList(
+    bs4Dash::bs4Card(
+      title = "Date of Publication",
+      width = 12,
+      status = "warning",
+      solidHeader = TRUE,
+      "Grouped into 3 month periods. Any items published before January 2021 are grouped into Jan to Mar 21."
+    ),
+    bs4Dash::bs4Card(
+      title = "JCVI Cohorts",
+      width = 12,
+      status = "warning",
+      solidHeader = TRUE,
+      tags$p(
+        "The order in which the population was prioritised to receive a COVID-19 vacicnation, to prevent COVID-19 mortality and protect health and social care staff and systems."
+      ),
+      tableOutput("hd_jcvi_cohorts")
+    ),
+    bs4Dash::bs4Card(
+      title = "Evidence Type",
+      width = 12,
+      status = "warning",
+      solidHeader = TRUE,
+      tags$p(
+        "The format of the resource."
+      ),
+      tableOutput("hd_evidence_types")
+    ),
+    bs4Dash::bs4Card(
+      title = "Level of Evidence",
+      width = 12,
+      status = "warning",
+      solidHeader = TRUE,
+      tags$p(
+        "Using Nesta's Standards of Evidence (",
+        tags$a(
+          href = "https://media.nesta.org.uk/documents/standards_of_evidence.pdf",
+          "media.nesta.org.uk/documents/standards_of_evidence.pdf"
+        ),
+        ")"
+      ),
+      tableOutput("hd_level_of_evidence")
+    ),
+    # accordion items
+    bs4Dash::bs4Card(
+      title = "Clinic Model",
+      width = 12,
+      status = "warning",
+      solidHeader = TRUE,
+      tags$p(
+        "Type of vaccination clinic model described in the resource."
+      ),
+      tableOutput("hd_clinic_models")
+    ),
+    bs4Dash::bs4Card(
+      title = "Intervention Type",
+      width = 12,
+      status = "warning",
+      solidHeader = TRUE,
+      tags$p(
+        "Main theme."
+      ),
+      tableOutput("hd_intervention_type")
+    ),
+    bs4Dash::bs4Card(
+      title = "Target Group",
+      width = 12,
+      status = "warning",
+      solidHeader = TRUE,
+      tags$p(
+        "Organised according to PROGRESS-Plus, an acronym used to identify characteristics that stratify health opportunities and outcomes. (",
+        tags$a(
+          href = "https://methods.cochrane.org/equity/projects/evidence-equity/progress-plus",
+          "https://methods.cochrane.org/equity/projects/evidence-equity/progress-plus"
+        ),
+        ")"
+      ),
+      tableOutput("hd_target_group")
+    ),
+    bs4Dash::bs4Card(
+      title = "Behavioural Change",
+      width = 12,
+      status = "warning",
+      solidHeader = TRUE,
+      tags$p(
+        "Mechanism of behaviour change: organised according to the COM-B model (Capability, Opportunity, Motivation)."
+      ),
+      tableOutput("hd_behavioural_change")
+    )
+  )
+
   body <- bs4Dash::bs4DashBody(
-    mod_knowledge_items_ui("evidence"),
+    bs4Dash::bs4TabItems(
+      bs4Dash::bs4TabItem(
+        tabName = "content",
+        mod_knowledge_items_ui("evidence")
+      ),
+      bs4Dash::bs4TabItem(
+        tabName = "heading_details",
+        heading_details
+      )
+    ),
     shinydisconnect::disconnectMessage(
       text = "Your session has timed out.",
       refresh = "Click here to reload",
