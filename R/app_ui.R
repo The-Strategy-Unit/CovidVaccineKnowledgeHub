@@ -30,8 +30,7 @@ app_ui <- function(request) {
         "all those 75 years of age and over" = "3",
         "all those 70 years of age and over and clinically extremely vulnerable individuals" = "4",
         "all those 65 years of age and over" = "5",
-        paste("all individuals aged 16 years to 64 years with underlying health conditions which put them at higher",
-              "risk of serious disease and mortality") = "6",
+        "all individuals aged 16 years to 64 years with underlying health conditions which put them at higher risk of serious disease and mortality" = "6",
         "all those 60 years of age and over" = "7",
         "all those 55 years of age and over" = "8",
         "all those 50 years of age and over" = "9",
@@ -56,12 +55,23 @@ app_ui <- function(request) {
   )
 
   body <- bs4Dash::bs4DashBody(
-    mod_knowledge_items_ui("evidence")
+    mod_knowledge_items_ui("evidence"),
+    shinydisconnect::disconnectMessage(
+      text = "Your session has timed out.",
+      refresh = "Click here to reload",
+      background = "#f9bf07",
+      size = 36,
+      width = 550,
+      top = "center",
+      colour = "white",
+      overlayColour = "#999",
+      refreshColour = "#2c2825",
+      overlayOpacity = 0.4
+    )
   )
 
   tagList(
     golem_add_external_resources(),
-    #tags$link(rel = "stylesheet", type = "text/css", href = "www/skin-su.css"),
     bs4Dash::bs4DashPage(
       header,
       sidebar,
