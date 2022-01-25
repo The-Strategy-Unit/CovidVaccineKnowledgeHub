@@ -17,6 +17,7 @@ load_data <- function() {
   progress_plus <- d |>
     dplyr::select(
       .data[["id"]],
+      .data[["General population"]],
       .data[["1. Place of residence"]],
       .data[["2. Race, ethnicity, culture, language"]],
       .data[["3. Occupation"]],
