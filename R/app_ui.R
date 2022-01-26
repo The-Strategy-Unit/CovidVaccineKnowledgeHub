@@ -22,14 +22,14 @@ app_ui <- function(request) {
         tabName = "content"
       ),
       bs4Dash::bs4SidebarMenuItem(
-        "Heading Details",
-        tabName = "heading_details"
+        "Category Information",
+        tabName = "category_information"
       )
     ),
     tags$br(),
     tags$hr(),
     # content filters
-    textInput("search", "Search"),
+    textInput("search", "Keyword Search"),
     selectizeInput(
       "dates",
       "Date of Publication",
@@ -57,7 +57,7 @@ app_ui <- function(request) {
     ),
     selectizeInput(
       "methods_used",
-      "Evidence Type",
+      "Knowledge Format",
       choices = NULL,
       multiple = TRUE
     ),
@@ -69,13 +69,13 @@ app_ui <- function(request) {
     )
   )
 
-  heading_details <- tagList(
+  category_information <- tagList(
     bs4Dash::bs4Card(
       title = "Date of Publication",
       width = 12,
       status = "warning",
       solidHeader = TRUE,
-      "Grouped into 3 month periods. Any items published before January 2021 are grouped into Jan to Mar 21."
+      "Grouped into three-month periods. Any items dated before January 2021 are included within Jan to Mar 21."
     ),
     bs4Dash::bs4Card(
       title = "JCVI Cohorts",
@@ -88,7 +88,7 @@ app_ui <- function(request) {
       tableOutput("hd_jcvi_cohorts")
     ),
     bs4Dash::bs4Card(
-      title = "Evidence Type",
+      title = "Knowledge Format",
       width = 12,
       status = "warning",
       solidHeader = TRUE,
@@ -129,7 +129,7 @@ app_ui <- function(request) {
       status = "warning",
       solidHeader = TRUE,
       tags$p(
-        "Main theme."
+        "The main intervention approach to increasing vaccine uptake."
       ),
       tableOutput("hd_intervention_type")
     ),
@@ -139,7 +139,7 @@ app_ui <- function(request) {
       status = "warning",
       solidHeader = TRUE,
       tags$p(
-        "Organised according to PROGRESS-Plus, an acronym used to identify characteristics that stratify health opportunities and outcomes. (",
+        "Where specified, the target groups are organised according to PROGRESS-Plus, an acronym used to identify characteristics that stratify health opportunities and outcomes.",
         tags$a(
           href = "https://methods.cochrane.org/equity/projects/evidence-equity/progress-plus",
           "https://methods.cochrane.org/equity/projects/evidence-equity/progress-plus"
@@ -154,7 +154,12 @@ app_ui <- function(request) {
       status = "warning",
       solidHeader = TRUE,
       tags$p(
-        "Mechanism of behaviour change: organised according to the COM-B model (Capability, Opportunity, Motivation)."
+        "The mechanism of behaviour change is organised according to the Capability, Opportunity, Motivation - Behaviour (COM-B) model. This model represents the observation that at any given moment, a particular behaviour will occur only when the person concerned has the capability and opportunity to engage in the behaviour and is more motivated to enact that behaviour than any other behaviours. (More information on the model can be found here:",
+        tags$a(
+          "www.qeios.com/read/WW04E6.2",
+          href = "https://www.qeios.com/read/WW04E6.2"
+        ),
+        ")"
       ),
       tableOutput("hd_behavioural_change")
     )
@@ -167,8 +172,8 @@ app_ui <- function(request) {
         mod_knowledge_items_ui("evidence")
       ),
       bs4Dash::bs4TabItem(
-        tabName = "heading_details",
-        heading_details
+        tabName = "category_information",
+        category_information
       )
     ),
     shinydisconnect::disconnectMessage(

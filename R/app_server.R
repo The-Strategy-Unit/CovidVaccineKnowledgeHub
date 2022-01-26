@@ -84,7 +84,8 @@ app_server <- function( input, output, session ) {
 
   output$hd_evidence_types <- renderTable({
     data() |>
-      dplyr::distinct(`Evidence Type` = evidence_type) |>
+      dplyr::distinct(`Evidence Type` = stringr::str_to_title(evidence_type)) |>
+      dplyr::mutate(dplyr::across(`Evidence Type`, ~ifelse(.x == "Faq", "FAQ", .x))) |>
       dplyr::arrange(`Evidence Type`) |>
       tidyr::drop_na()
   })
@@ -120,16 +121,17 @@ app_server <- function( input, output, session ) {
 
   output$hd_target_group <- renderTable({
     dplyr::tribble(~`PROGRESS-PLUS`, ~Description,
-      "1. Place of residence", "Place of residence can refer to the type of dwelling, location of dwelling, specilist dwelling or lack of dwelling (e.g. people experiencing homelessness).",
-      "2. Race, ethnicity, culture, language", "There are many health outcomes that accrue inequitably due to race, ethnicity, culture, and language. Health risks and outcomes are often stratified between ethnic groups, with worse health outcomes often observed in Black, Asian, and Minority Ethnic populations.",
-      "3. Occupation", "May refer to the status of employment or type of employment.",
-      "4. Gender/Sex", "Gender-based and biological differences can lead to unequal distribution of disease risks, incidence and outcomes, as well as healthcare service needs. Other differences can be due to inequitable exposure to risk or protections based on sex or gender.",
-      "5. Religion", "Religious affiliation or a lack thereof can lead to inequitable exposure to harms or opportunities.",
-      "6. Education", "Education is known to impact on health status due to its relationship with employment, and consequently, income, but also due to the co-location and embedding of other health interventions into educational settings.",
-      "7. Socioeconomic status (SES)", "Higher SES is associated with longer life expectancy and fewer years of poor health due.",
-      "8. Social Capital", "Defined as social relationships and networks; this includes interpersonal trust between members of a community, civic participation, and the willingness of community members to assist eachother.",
-      "9. Age", "Age is an unavoidable risk factor for many diseases, however certain age groups can be inequitably impacted by avoidable differences in access to services and technology. This category encompasses any intervention targeted at a particular age group.",
-      "10. Disability", "Refers to any physical or mental impairment that can result in reduced access to healthcare."
+      "1. Place of residence", "Refers to interventions aimed at dwelling type, location, or lack of (e.g. people experiencing homelessness).",
+      "2. Race, ethnicity, culture, language", "Refers to interventions targeted by ethnicity, culture, and language.",
+      "3. Occupation", "Refers to the occupational group targeted.",
+      "4. Gender/Sex", "Refers to targeted gender-based interventions.",
+      "5. Religion", "Refers to the religious affiliation targeted for increasing vaccine equity.",
+      "6. Education", "Refers to interventions in educational settings or specific groups of students.",
+      "7. Socioeconomic status", "Refers to interventions delivered specifically to target socio-economic groups.",
+      "8. Social capital", "Refers to interventions where community and social capital has been used.",
+      "9. Age", "Refers to targeted age-based interventions.",
+      "10. Disability", "Refers to interventions targeting people with specific physical or mental health impairment.",
+      "General population", "Refers to interventions targeting the general population to increase vaccine uptake."
     )
   })
 
