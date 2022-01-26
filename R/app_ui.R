@@ -26,6 +26,8 @@ app_ui <- function(request) {
         tabName = "heading_details"
       )
     ),
+    tags$br(),
+    tags$hr(),
     # content filters
     textInput("search", "Search"),
     selectizeInput(
