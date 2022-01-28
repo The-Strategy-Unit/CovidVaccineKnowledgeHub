@@ -52,7 +52,7 @@ mod_knowledge_items_server <- function(id, data_reactive) {
           ),
           htmltools::p(
             htmltools::strong("Intervention Type: "),
-            x$main_theme
+            x$intervention_type
           ),
           htmltools::p(
             htmltools::strong("Target Group: "),

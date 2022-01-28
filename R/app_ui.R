@@ -56,7 +56,7 @@ app_ui <- function(request) {
       multiple = TRUE
     ),
     selectizeInput(
-      "methods_used",
+      "knowledge_format",
       "Knowledge Format",
       choices = NULL,
       multiple = TRUE

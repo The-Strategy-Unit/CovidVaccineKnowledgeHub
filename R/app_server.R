@@ -19,8 +19,8 @@ app_server <- function( input, output, session ) {
   observe({
     d <- data()
 
-    methods_used <- sort(unique(d[["methods_used"]]))
-    updateSelectizeInput(session, "methods_used", choices = methods_used)
+    knowledge_format <- sort(unique(d[["knowledge_format"]]))
+    updateSelectizeInput(session, "knowledge_format", choices = knowledge_format)
 
     dates <- levels(d$date)
     updateSelectizeInput(session, "dates", choices = dates)
@@ -49,9 +49,9 @@ app_server <- function( input, output, session ) {
         dplyr::filter(.data[["level_evidence"]] %in% input$level_evidence)
     }
 
-    if (isTruthy(input$methods_used)) {
+    if (isTruthy(input$knowledge_format)) {
       d <- d |>
-        dplyr::filter(.data[["methods_used"]] %in% input$methods_used)
+        dplyr::filter(.data[["knowledge_format"]] %in% input$knowledge_format)
     }
 
     if (isTruthy(input$jcvi_cohort)) {

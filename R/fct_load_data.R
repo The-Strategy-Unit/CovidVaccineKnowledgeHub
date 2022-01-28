@@ -5,11 +5,16 @@
 #' @return A tibble containing the data from the excel file.
 #'
 #' @noRd
-load_data <- function() {
-  filename <- withr::local_file("data.xlsx")
-  url <- "https://strategyunit.blob.core.windows.net/927covidvaccineknowledge/data.xlsx"
+load_data <- function(load_from_azure = getOption("golem.app.prod", TRUE)) {
+  if (!load_from_azure) {
+    filename <- withr::local_file("data.xlsx")
+    url <- "https://strategyunit.blob.core.windows.net/927covidvaccineknowledge/data.xlsx"
 
-  download.file(url, filename, mode = "wb")
+    download.file(url, filename, mode = "wb")
+  } else {
+    filename <- app_sys("data.xlsx")
+    cat("using", filename, "\n")
+  }
 
   d <- readxl::read_excel(filename, sheet = "Datasheet", skip = 1) |>
     dplyr::mutate(id = dplyr::row_number(), .before = dplyr::everything())
@@ -73,15 +78,13 @@ load_data <- function() {
       location = .data[["Location"]],
       title = .data[["Resource title"]],
       publisher = .data[["Publisher"]],
-      date = .data[["Date of publication: organised into four month periods, beginning January 2020."]], # Exclude Linting
-      evidence_type = .data[["Evidence type: the format of the resource."]], # Exclude Linting
-      level_evidence = .data[["Level of evidence: organised according to Nesta's Standards of Evidence. Level 1 is the weakest evidence type, usually consisting of an account of the impact. The strongest evidence is level 5, with the resource showing that the intervention could be scal"]],
-      main_theme = .data[["Main Theme"]],
-      methods_used = .data[["Methods used: the process used which lead to the outcome described."]],
-      brief_description = .data[["Brief description of the intervention/model"]],
-      rationale = .data[["Rationale for the intervention/ model"]],
-      clinic_model = .data[["Clinic model"]],
-      source = .data[["Link to original source"]]
+      date = .data[["Date of publication"]],
+      evidence_type = .data[["Evidence type"]],
+      level_evidence = .data[["Level of evidence"]],
+      intervention_type = .data[["Intervention type"]],
+      knowledge_format = .data[["Methods used"]],
+      clinic_model = .data[["Clinic type/vaccine delivery model"]],
+      source = .data[["Source"]]
     ) |>
     dplyr::left_join(progress_plus, by = "id") |>
     dplyr::left_join(jcvi_cohort, by = "id") |>
