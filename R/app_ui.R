@@ -112,7 +112,8 @@ app_ui <- function(request) {
         "Using Nesta's Standards of Evidence (",
         tags$a(
           href = "https://media.nesta.org.uk/documents/standards_of_evidence.pdf",
-          "media.nesta.org.uk/documents/standards_of_evidence.pdf"
+          "media.nesta.org.uk/documents/standards_of_evidence.pdf",
+          target="_blank"
         ),
         ")"
       ),
@@ -147,8 +148,9 @@ app_ui <- function(request) {
       tags$p(
         "Where specified, the target groups are organised according to PROGRESS-Plus, an acronym used to identify characteristics that stratify health opportunities and outcomes.",
         tags$a(
+          "https://methods.cochrane.org/equity/projects/evidence-equity/progress-plus",
           href = "https://methods.cochrane.org/equity/projects/evidence-equity/progress-plus",
-          "https://methods.cochrane.org/equity/projects/evidence-equity/progress-plus"
+          target="_blank"
         ),
         ")"
       ),
@@ -163,7 +165,17 @@ app_ui <- function(request) {
         "The mechanism of behaviour change is organised according to the Capability, Opportunity, Motivation - Behaviour (COM-B) model. This model represents the observation that at any given moment, a particular behaviour will occur only when the person concerned has the capability and opportunity to engage in the behaviour and is more motivated to enact that behaviour than any other behaviours. (More information on the model can be found here:",
         tags$a(
           "www.qeios.com/read/WW04E6.2",
-          href = "https://www.qeios.com/read/WW04E6.2"
+          href = "https://www.qeios.com/read/WW04E6.2",
+          target="_blank"
+        ),
+        ")"
+      ),
+      tags$p(
+        "The COM-B model is integral to the World Health Organisation’s Tailoring Immunization Programmes (TIP) approach (",
+        tags$a(
+          "apps.who.int/iris/bitstream/handle/10665/329448/9789289054492-eng.pdf",
+          href = "https://apps.who.int/iris/bitstream/handle/10665/329448/9789289054492-eng.pdf",
+          target="_blank"
         ),
         ")"
       ),
