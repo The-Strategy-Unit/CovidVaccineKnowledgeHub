@@ -15,6 +15,7 @@ app_ui <- function(request) {
   sidebar <- bs4Dash::bs4DashSidebar(
     skin = "light",
     bs4Dash::bs4SidebarMenu(
+      id = "sidebarmenu",
       bs4Dash::bs4SidebarMenuItem(
         "Content",
         startExpanded = TRUE,
@@ -29,47 +30,52 @@ app_ui <- function(request) {
     tags$br(),
     tags$hr(),
     # content filters
-    textInput("search", "Keyword Search"),
-    selectizeInput(
-      "dates",
-      "Date of Publication",
-      choices = NULL,
-      multiple = TRUE
-    ),
-    selectizeInput(
-      "jcvi_cohort",
-      "JCVI Cohort",
-      choices = c(
-        "Residents in a care home for older adults and their carers." = "1",
-        "All those 80 years of age and over and frontline health and social care workers." = "2",
-        "All those 75 years of age and over." = "3",
-        "All those 70 years of age and over and clinically extremely vulnerable individuals." = "4",
-        "All those 65 years of age and over." = "5",
-        "All individuals aged 16 years to 64 years with underlying health conditions which put them at higher risk of serious disease and mortality." = "6",
-        "All those 60 years of age and over." = "7",
-        "All those 55 years of age and over." = "8",
-        "All those 50 years of age and over." = "9",
-        "All those aged 40 to 49 years." = "10",
-        "All those aged 30 to 39 years." = "11",
-        "All those aged 18 to 29 years." = "12"
+    tags$div(
+      id = "content-filters",
+      textInput("search", "Keyword Search"),
+      selectizeInput(
+        "dates",
+        "Date of Publication",
+        choices = NULL,
+        multiple = TRUE
       ),
-      multiple = TRUE
-    ),
-    selectizeInput(
-      "knowledge_format",
-      "Knowledge Format",
-      choices = NULL,
-      multiple = TRUE
-    ),
-    selectizeInput(
-      "level_evidence",
-      "Level of Evidence",
-      choices = 1:3,
-      multiple = TRUE
+      selectizeInput(
+        "jcvi_cohort",
+        "JCVI Cohort",
+        choices = c(
+          "Residents in a care home for older adults and their carers." = "1",
+          "All those 80 years of age and over and frontline health and social care workers." = "2",
+          "All those 75 years of age and over." = "3",
+          "All those 70 years of age and over and clinically extremely vulnerable individuals." = "4",
+          "All those 65 years of age and over." = "5",
+          "All individuals aged 16 years to 64 years with underlying health conditions which put them at higher risk of serious disease and mortality." = "6",
+          "All those 60 years of age and over." = "7",
+          "All those 55 years of age and over." = "8",
+          "All those 50 years of age and over." = "9",
+          "All those aged 40 to 49 years." = "10",
+          "All those aged 30 to 39 years." = "11",
+          "All those aged 18 to 29 years." = "12"
+        ),
+        multiple = TRUE
+      ),
+      selectizeInput(
+        "knowledge_format",
+        "Knowledge Format",
+        choices = NULL,
+        multiple = TRUE
+      ),
+      selectizeInput(
+        "level_evidence",
+        "Level of Evidence",
+        choices = 1:3,
+        multiple = TRUE
+      )
     )
   )
 
   category_information <- tagList(
+    shiny::actionLink("back_content", HTML("&#8592; back to Content")),
+    tags$br(),
     bs4Dash::bs4Card(
       title = "Date of Publication",
       width = 12,
@@ -192,6 +198,7 @@ app_ui <- function(request) {
 
   tagList(
     golem_add_external_resources(),
+    shinyjs::useShinyjs(),
     bs4Dash::bs4DashPage(
       header,
       sidebar,

@@ -13,9 +13,20 @@ app_server <- function( input, output, session ) {
     load_data()
   })
 
+  observeEvent(input$sidebarmenu, {
+    if (input$sidebarmenu == "content") {
+      shinyjs::showElement("content-filters")
+    } else {
+      shinyjs::hideElement("content-filters")
+    }
+  })
+
+  observeEvent(input$back_content, {
+    bs4Dash::updateTabItems(session, "sidebarmenu", "content")
+  })
+
   # update inputs
   # populate evidence
-
   observe({
     d <- data()
 
@@ -94,7 +105,9 @@ app_server <- function( input, output, session ) {
     dplyr::tribble(~Level, ~Description,
       "1", "The resource gives an account of impact, providing a logical reason, or set of reasons, for why the intervention could have an impact and why that would be an improvement on the current situation.",
       "2", "The resource provides evidence of gathering data that shows some change amongst those receiving or using your intervention. At this stage, data can begin to show effect but it will not evidence direct causality.",
-      "3", "The resource demonstrates that the intervention is causing the impact, by showing less impact amongst those who don’t receive the product/service. Methods might include a control group (or another well justified method) that begin to isolate  the impact of the product/service. Random selection  of participants strengthens evidence at this Level."
+      "3", "The resource demonstrates that the intervention is causing the impact, by showing less impact amongst those who don’t receive the product/service. Methods might include a control group (or another well justified method) that begin to isolate  the impact of the product/service. Random selection  of participants strengthens evidence at this Level.",
+      "4", "The resource explains why and how the intervention is having the impact observed. In addition, the intervention can deliver impact at a reasonable cost, suggesting that it could be replicated/commissioned in multiple locations. At this stage, we are looking for a robust independent  evaluation that investigates and validates the nature of the impact, that shows standardisation of delivery  and processes and data on costs.",
+      "5", "The resource shows that the intervention could be replicated elsewhere and scaled up, whilst continuing to have positive and direct impact on the outcome, and whilst remaining a financially viable proposition. We expect to see use of methods like multiple replication evaluations; future scenario analysis; and scaled up, fidelity evaluation."
     )
   })
 
