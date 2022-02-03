@@ -50,7 +50,7 @@ app_server <- function( input, output, session ) {
     if (isTruthy(input$search)) {
       # TODO: replace regex with levenshtein?
       d <- d |>
-        dplyr::filter(dplyr::if_any(where(is.character), stringr::str_detect, stringr::fixed(input$search)))
+        dplyr::filter(dplyr::if_any(where(is.character), stringr::str_detect, stringr::regex(input$search, ignore_case = TRUE)))
     }
 
     if (isTruthy(input$dates)) {
@@ -84,6 +84,10 @@ app_server <- function( input, output, session ) {
     }
 
     d
+  })
+
+  output$no_results <- renderText({
+    ifelse(nrow(filtered_data()) == 0, "No results found", "")
   })
 
   mod_knowledge_items_server("evidence", filtered_data)

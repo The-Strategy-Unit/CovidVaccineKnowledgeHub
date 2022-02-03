@@ -83,6 +83,7 @@ load_data <- function(load_from_azure = getOption("golem.app.prod", TRUE)) {
       intervention_type = .data[["Intervention type"]],
       knowledge_format = .data[["Methods used"]],
       clinic_model = .data[["Clinic type/vaccine delivery model"]],
+      brief_description = .data[["Brief description of the intervention/model"]],
       source = .data[["Source"]]
     ) |>
     dplyr::left_join(progress_plus, by = "id") |>

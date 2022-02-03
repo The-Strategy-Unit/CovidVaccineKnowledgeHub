@@ -35,8 +35,32 @@ app_ui <- function(request) {
       id = "content-filters",
       textInput("search", "Keyword Search"),
       selectizeInput(
-        "dates",
-        "Date of Publication",
+        "target_group",
+        "Target Group",
+        choices = c(
+          "1. Place of residence",
+          "2. Race, ethnicity, culture, language",
+          "3. Occupation",
+          "4. Gender/Sex",
+          "5. Religion",
+          "6. Education",
+          "7. Socioeconomic status",
+          "8. Social capital",
+          "9. Age",
+          "10. Disability",
+          "General population"
+        ),
+        multiple = TRUE
+      ),
+      selectizeInput(
+        "intervention_type",
+        "Intervention Type",
+        choices = NULL,
+        multiple = TRUE
+      ),
+      selectizeInput(
+        "knowledge_format",
+        "Knowledge Format",
         choices = NULL,
         multiple = TRUE
       ),
@@ -60,39 +84,15 @@ app_ui <- function(request) {
         multiple = TRUE
       ),
       selectizeInput(
-        "knowledge_format",
-        "Knowledge Format",
+        "dates",
+        "Date of Publication",
         choices = NULL,
         multiple = TRUE
       ),
       selectizeInput(
         "level_evidence",
         "Level of Evidence",
-        choices = 1:3,
-        multiple = TRUE
-      ),
-      selectizeInput(
-        "intervention_type",
-        "Intervention Type",
-        choices = NULL,
-        multiple = TRUE
-      ),
-      selectizeInput(
-        "target_group",
-        "Target Group",
-        choices = c(
-          "1. Place of residence",
-          "2. Race, ethnicity, culture, language",
-          "3. Occupation",
-          "4. Gender/Sex",
-          "5. Religion",
-          "6. Education",
-          "7. Socioeconomic status",
-          "8. Social capital",
-          "9. Age",
-          "10. Disability",
-          "General population"
-        ),
+        choices = 1:5,
         multiple = TRUE
       )
     )
@@ -215,7 +215,8 @@ app_ui <- function(request) {
     bs4Dash::bs4TabItems(
       bs4Dash::bs4TabItem(
         tabName = "content",
-        mod_knowledge_items_ui("evidence")
+        mod_knowledge_items_ui("evidence"),
+        textOutput("no_results")
       ),
       bs4Dash::bs4TabItem(
         tabName = "category_information",
