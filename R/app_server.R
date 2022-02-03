@@ -33,6 +33,9 @@ app_server <- function( input, output, session ) {
     knowledge_format <- sort(unique(d[["knowledge_format"]]))
     updateSelectizeInput(session, "knowledge_format", choices = knowledge_format)
 
+    intervention_type <- sort(unique(d[["intervention_type"]]))
+    updateSelectizeInput(session, "intervention_type", choices = intervention_type)
+
     dates <- levels(d$date)
     updateSelectizeInput(session, "dates", choices = dates)
 
@@ -68,6 +71,16 @@ app_server <- function( input, output, session ) {
     if (isTruthy(input$jcvi_cohort)) {
       d <- d |>
         dplyr::filter(purrr::map_lgl(.data[["jcvi_cohort"]], ~any(.x %in% input$jcvi_cohort)))
+    }
+
+    if (isTruthy(input$target_group)) {
+      d <- d |>
+        dplyr::filter(purrr::map_lgl(.data[["progress_plus"]], ~any(.x %in% input$target_group)))
+    }
+
+    if (isTruthy(input$intervention_type)) {
+      d <- d |>
+        dplyr::filter(.data[["intervention_type"]] %in% input$intervention_type)
     }
 
     d

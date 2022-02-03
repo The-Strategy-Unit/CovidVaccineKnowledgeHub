@@ -70,6 +70,30 @@ app_ui <- function(request) {
         "Level of Evidence",
         choices = 1:3,
         multiple = TRUE
+      ),
+      selectizeInput(
+        "intervention_type",
+        "Intervention Type",
+        choices = NULL,
+        multiple = TRUE
+      ),
+      selectizeInput(
+        "target_group",
+        "Target Group",
+        choices = c(
+          "1. Place of residence",
+          "2. Race, ethnicity, culture, language",
+          "3. Occupation",
+          "4. Gender/Sex",
+          "5. Religion",
+          "6. Education",
+          "7. Socioeconomic status",
+          "8. Social capital",
+          "9. Age",
+          "10. Disability",
+          "General population"
+        ),
+        multiple = TRUE
       )
     )
   )
