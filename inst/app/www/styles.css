@@ -1,3 +1,16 @@
 .nav-pills .nav-link {
     background-color: #EFEFEF;
 }
+
+.back-content {
+  position: fixed;
+  top: 3.5rem;
+  left: 0;
+  height: 2rem;
+  width: 100%;
+  z-index: 999;
+  background-color: #f4f6f9;
+  text-align: right;
+  padding-right: 1.5rem;
+  padding-top: 0.5rem;
+}

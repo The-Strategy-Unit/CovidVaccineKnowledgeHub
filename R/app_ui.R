@@ -9,7 +9,8 @@ app_ui <- function(request) {
     title = bs4Dash::dashboardBrand(
       "Vaccine Knowledge",
       image = "https://www.strategyunitwm.nhs.uk/themes/custom/ie_bootstrap/logo.svg"
-    )
+    ),
+    fixed = TRUE
   )
 
   sidebar <- bs4Dash::bs4DashSidebar(
@@ -74,7 +75,10 @@ app_ui <- function(request) {
   )
 
   category_information <- tagList(
-    shiny::actionLink("back_content", HTML("&#8592; back to Content")),
+    tags$div(
+      class = "back-content",
+      shiny::actionLink("back_content", HTML("&#8592; back to Content")),
+    ),
     tags$br(),
     bs4Dash::bs4Card(
       title = "Date of Publication",
