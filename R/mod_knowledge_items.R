@@ -27,7 +27,7 @@ mod_knowledge_items_server <- function(id, data_reactive) {
       htmltools::div(
         class = "card-header",
         id = headerid,
-        htmltools::h5(
+        htmltools::h3(
           class = "mb-0",
           htmltools::tags$button(
             class = "btn btn-link",
@@ -46,9 +46,9 @@ mod_knowledge_items_server <- function(id, data_reactive) {
             "data-toggle" = "collapse",
             "data-target" = paste0("#", collapseid),
             tags$i(
-              class="fa fa-plus",
+              class="fa fa-chevron-down",
               role="presentation",
-              "aria-label" = "plus icon"
+              "aria-label" = "expand icon"
             )
           )
         )
