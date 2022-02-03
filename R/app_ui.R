@@ -101,8 +101,9 @@ app_ui <- function(request) {
   category_information <- tagList(
     tags$div(
       class = "back-content",
-      shiny::actionLink("back_content", HTML("&#8592; back to Content")),
+      shiny::actionButton("back_content", HTML("&#8592; back to Content")),
     ),
+    tags$br(),
     tags$br(),
     bs4Dash::bs4Card(
       title = "Date of Publication",
