@@ -1,1 +1,1 @@
-rsconnect::deployApp()
+rsconnect::deployApp(forceUpdate = TRUE)
