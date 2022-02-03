@@ -13,7 +13,6 @@ load_data <- function(load_from_azure = getOption("golem.app.prod", TRUE)) {
     download.file(url, filename, mode = "wb")
   } else {
     filename <- app_sys("data.xlsx")
-    cat("using", filename, "\n")
   }
 
   d <- readxl::read_excel(filename, sheet = "Datasheet", skip = 1) |>
