@@ -37,6 +37,20 @@ mod_knowledge_items_server <- function(id, data_reactive) {
             "aria-controls" = collapseid,
             x$title
           )
+        ),
+        tags$div(
+          class = "card-tools float-right",
+          tags$button(
+            class = "btn btn-tool btn-sm",
+            type = "button",
+            "data-toggle" = "collapse",
+            "data-target" = paste0("#", collapseid),
+            tags$i(
+              class="fa fa-plus",
+              role="presentation",
+              "aria-label" = "plus icon"
+            )
+          )
         )
       ),
       htmltools::div(
