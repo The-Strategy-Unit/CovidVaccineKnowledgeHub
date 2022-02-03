@@ -236,6 +236,26 @@ app_ui <- function(request) {
     )
   )
 
+  footer <- bs4Dash::bs4DashFooter(
+    tags$span(
+      "Produced by ",
+      tags$a(
+        "The Strategy Unit",
+        href = "https://strategyunitwm.nhs.uk/",
+        target = "_blank"
+      ),
+      ". View the ",
+      tags$a(
+        tagList(
+          "code on",
+          tags$i(class = "fab fa-github")
+        ),
+        href = "https://github.com/The-Strategy-Unit/CovidVaccineKnowledgeHub",
+        target = "_blank"
+      )
+    )
+  )
+
   tagList(
     golem_add_external_resources(),
     shinyjs::useShinyjs(),
@@ -243,6 +263,7 @@ app_ui <- function(request) {
       header,
       sidebar,
       body,
+      footer = footer,
       freshTheme = su_fresh_theme
     )
   )
