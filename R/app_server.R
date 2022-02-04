@@ -48,12 +48,14 @@ app_server <- function( input, output, session ) {
     d <- data()
 
     if (isTruthy(input$search)) {
-      # TODO: replace regex with levenshtein?
-      s <- stringr::str_remove_all(input$search, "[^A-Za-z0-9,|\\-_ ]")
-      r <- stringr::regex(s, ignore_case = TRUE)
+      # split search terms by spaces, only keep alpha
+      s <- stringr::str_split(input$search, " ")[[1]] |>
+        stringr::str_remove_all("[^A-Za-z]") |>
+        purrr::discard(~.x == "")
 
-      d <- d |>
-        dplyr::filter(dplyr::if_any(where(is.character), stringr::str_detect, r))
+      f <- \(text) purrr::some(s, ~min(stringdist::stringdist(.x, text)) <= 1)
+
+      d <- d[purrr::map_lgl(d[["all_text"]], f),]
     }
 
     if (isTruthy(input$dates)) {

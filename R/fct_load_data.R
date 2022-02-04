@@ -15,6 +15,9 @@ load_data <- function(load_from_azure = getOption("golem.app.prod", TRUE)) {
     filename <- app_sys("data.xlsx")
   }
 
+  # generated from tm::stopwords() |> writeLines(app_sys("stop_words.txt"))
+  stop_words <- readLines(app_sys("stop_words.txt"))
+
   d <- readxl::read_excel(filename, sheet = "Datasheet", skip = 1) |>
     dplyr::mutate(id = dplyr::row_number(), .before = dplyr::everything())
 
@@ -108,5 +111,19 @@ load_data <- function(load_from_azure = getOption("golem.app.prod", TRUE)) {
       )
     ) |>
     dplyr::rowwise() |>
-    dplyr::mutate(all_text = paste(dplyr::c_across(where(is.character)), collapse = " "))
+    dplyr::mutate(
+      all_text = paste(dplyr::c_across(c(location, title, publisher, brief_description)), collapse = " "),
+      dplyr::across(
+        all_text,
+        \(x) {
+          x |>
+            stringr::str_replace_all("\\s+", " ") |>
+            stringr::str_to_lower() |>
+            stringr::str_remove_all("[^A-Za-z0-9 ]") |>
+            stringr::str_split(" ") |>
+            purrr::map_at(1, \(.x) unique(.x[!.x %in% stop_words & .x != ""]))
+        }
+      )
+    ) |>
+    dplyr::ungroup()
 }
