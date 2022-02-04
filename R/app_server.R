@@ -49,8 +49,11 @@ app_server <- function( input, output, session ) {
 
     if (isTruthy(input$search)) {
       # TODO: replace regex with levenshtein?
+      s <- stringr::str_remove_all(input$search, "[^A-Za-z0-9,|\\-_ ]")
+      r <- stringr::regex(s, ignore_case = TRUE)
+
       d <- d |>
-        dplyr::filter(dplyr::if_any(where(is.character), stringr::str_detect, stringr::regex(input$search, ignore_case = TRUE)))
+        dplyr::filter(dplyr::if_any(where(is.character), stringr::str_detect, r))
     }
 
     if (isTruthy(input$dates)) {
