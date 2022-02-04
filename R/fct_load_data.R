@@ -6,7 +6,7 @@
 #'
 #' @noRd
 load_data <- function(load_from_azure = getOption("golem.app.prod", TRUE)) {
-  if (!load_from_azure) {
+  if (load_from_azure) {
     filename <- withr::local_file("data.xlsx")
     url <- "https://strategyunit.blob.core.windows.net/927covidvaccineknowledge/data.xlsx"
 
@@ -106,5 +106,7 @@ load_data <- function(load_from_azure = getOption("golem.app.prod", TRUE)) {
             # "Oct to Dec 21"
           ))
       )
-    )
+    ) |>
+    dplyr::rowwise() |>
+    dplyr::mutate(all_text = paste(dplyr::c_across(where(is.character)), collapse = " "))
 }
