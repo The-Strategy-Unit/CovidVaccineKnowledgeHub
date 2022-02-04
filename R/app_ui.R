@@ -216,8 +216,8 @@ app_ui <- function(request) {
     bs4Dash::bs4TabItems(
       bs4Dash::bs4TabItem(
         tabName = "content",
-        mod_knowledge_items_ui("evidence"),
-        textOutput("no_results")
+        textOutput("number_of_results"),
+        mod_knowledge_items_ui("evidence")
       ),
       bs4Dash::bs4TabItem(
         tabName = "category_information",

@@ -86,8 +86,9 @@ app_server <- function( input, output, session ) {
     d
   })
 
-  output$no_results <- renderText({
-    ifelse(nrow(filtered_data()) == 0, "No results found", "")
+  output$number_of_results <- renderText({
+    n <- nrow(filtered_data())
+    paste(ifelse(n == 0, "No", n), "results found.")
   })
 
   mod_knowledge_items_server("evidence", filtered_data)
