@@ -5,8 +5,11 @@
 .Rproj.user
 .vscode/launch.json
 .vscode/tasks.json
+dev/deploy_app.R
 dev/run_dev.R
 Readme.md
 Readme.Rmd
 rsconnect/
 tests/
+man/
+inst/data.xlsx
