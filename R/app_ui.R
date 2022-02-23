@@ -94,6 +94,10 @@ app_ui <- function(request) {
         "Level of Evidence",
         choices = 1:5,
         multiple = TRUE
+      ),
+      actionButton(
+        "clear_search",
+        "Clear Search"
       )
     )
   )

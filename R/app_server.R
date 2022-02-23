@@ -43,6 +43,18 @@ app_server <- function( input, output, session ) {
     updateSelectizeInput(session, "tags", choices = tags)
   })
 
+  observeEvent(input$clear_search, {
+    req(input$clear_search)
+
+    updateTextInput(session, "search", value = "")
+    updateSelectizeInput(session, "dates", selected = c(""))
+    updateSelectizeInput(session, "level_evidence", selected = c(""))
+    updateSelectizeInput(session, "knowledge_format", selected = c(""))
+    updateSelectizeInput(session, "jcvi_cohort", selected = c(""))
+    updateSelectizeInput(session, "target_group", selected = c(""))
+    updateSelectizeInput(session, "intervention_type", selected = c(""))
+  })
+
   # outputs
   filtered_data <- reactive({
     d <- data()
