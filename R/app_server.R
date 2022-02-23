@@ -63,6 +63,7 @@ app_server <- function( input, output, session ) {
       # split search terms by spaces, only keep alpha
       s <- stringr::str_split(input$search, " ")[[1]] |>
         stringr::str_remove_all("[^A-Za-z]") |>
+        stringr::str_to_lower() |>
         purrr::discard(~.x == "")
 
       f <- \(text) purrr::some(s, ~min(stringdist::stringdist(.x, text)) <= 1)
