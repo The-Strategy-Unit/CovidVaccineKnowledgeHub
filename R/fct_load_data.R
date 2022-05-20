@@ -112,7 +112,7 @@ load_data <- function(load_from_azure = getOption("golem.app.prod", TRUE)) {
     ) |>
     dplyr::rowwise() |>
     dplyr::mutate(
-      all_text = paste(dplyr::c_across(c(location, title, publisher, brief_description)), collapse = " "),
+      all_text = paste(dplyr::c_across(where(is.character)), collapse = " "),
       dplyr::across(
         all_text,
         \(x) {
